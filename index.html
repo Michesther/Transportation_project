@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transportation Landing Page</title>
+    <style>
+        /* Basic Reset */
+        body, h1, h2, h3, p, ul, li, a, button {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            text-decoration: none;
+            font-family: 'Arial', sans-serif;
+        }
+        body {
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* Full-Width Container */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative; 
+        }
+        
+
+       .navbar ul {
+         list-style: none;
+         display: flex;
+        justify-content: flex-end; 
+         padding: 25px;
+        background-color: #151f28;
+        margin: 0;
+    }
+
+       .navbar ul li {
+            margin: 0 10px; 
+}
+
+.navbar ul li a {
+    color: #fff;
+    font-size: 14px; 
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 5px 10px;
+    transition: color 0.3s;
+}
+
+.navbar ul li a.active {
+    color: #ffd700;  /* Brighter color for active link */
+    border-bottom: 2px solid #fff;  /* White underline for active link */
+}
+
+.navbar ul li a:hover {
+    color: #FF9900;
+}
+
+     
+
+
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            position: relative;
+            overflow: hidden; 
+        }
+
+        .hero video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            z-index: -1; 
+        }
+
+        .hero h1 {
+            font-size: 50px;
+            font-family: 'Cursive', Arial, sans-serif;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero button {
+            background-color: #ffd700;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            color: #333;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .hero button:hover {
+            background-color: #FF9900;
+        }
+
+        /* Other sections can stay the same */
+
+        /* Services Section */
+        .services {
+            background-color: #fff;
+            padding: 60px 20px;
+            text-align: center;
+            background: linear-gradient(to bottom, #fff 50%, #f4f4f4 50%);
+        }
+        .services h2 {
+            font-size: 36px;
+            color: #ffd700;
+            margin-bottom: 40px;
+        }
+        .services .service-item {
+            display: inline-block;
+            width: 30%;
+            margin: 0 1.5%;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .services .service-item:hover {
+            transform: translateY(-10px);
+        }
+        .services img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 15px;
+        }
+
+        /* About Section (Slider) */
+        .about {
+            background-color: #f4f4f4;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .about-slider {
+            width: 80%;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .about-slide {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 300px;
+            transition: transform 0.5s ease-in-out;
+        }
+        .about-slide img {
+            width: 40%;
+            margin-right: 20px;
+            border-radius: 10px;
+        }
+        .about-slide p {
+            width: 50%;
+            font-size: 18px;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background-color: #fff;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .testimonials h2 {
+            font-size: 36px;
+            color: #ffd700;
+            margin-bottom: 40px;
+        }
+        .testimonial-item {
+            display: inline-block;
+            width: 30%;
+            margin: 0 1.5%;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .testimonial-item:hover {
+            transform: translateY(-10px);
+        }
+        .testimonial-item img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+        .testimonial-item p {
+            font-size: 16px;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        .testimonial-item .customer-name {
+            font-weight: bold;
+            color: #FF9900;
+        }
+
+        /* Contact Section */
+        .contact {
+            background-color: #f4f4f4;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .contact h2 {
+            font-size: 36px;
+            color: #ffd700;
+            margin-bottom: 40px;
+        }
+        .contact form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .contact input, .contact textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .contact button {
+            background-color: #ffd700;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            color: #333;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .contact button:hover {
+            background-color: #FF9900;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #151f28;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        .navimg img{
+            height: 2.5vh; /* Sets the height to 5% of the viewport height */
+            /* width: auto; Keeps the width proportional */
+            display: flex;
+            justify-content: center; /* Centers the image horizontally */
+            align-items: center; /* Centers the image vertically */
+            overflow: hidden; /* Ensures no overflow occurs */
+            width: 100vw;
+            image-rendering: crisp-edges; /* Improve rendering quality */
+            image-rendering: -webkit-optimize-contrast;
+        }
+
+.header-image img {
+    max-height: 100%;
+    max-width: 100%;
+}
+img{
+    width: fit-content;
+}
+
+        
+
+
+    </style>
+</head>
+<body>
+    <div class="navimg">
+        <img src="images/Untitled design (2).png" alt="">
+
+    </div>
+    <div class="navbar">
+        
+        <ul>
+            <li><a href="#" class="nav-link active">HOME</a></li>
+            <li><a href="#" class="nav-link">CATALOGUE</a></li>
+            <li><a href="#" class="nav-link">FRONG PLAN</a></li>
+            <li><a href="tel:08106008785" class="nav-link">HELP</a></li>
+            <li><a href="#" id="ME" class="nav-link">...</a></li>
+        </ul>
+    </div>
+    
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <video autoplay muted loop class="hero-video">
+            <source src="" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="container">
+            <h1>Experience Comfort & Safety</h1>
+            <p>Reliable transportation services for all your needs. Your journey starts with us.</p>
+            <button>Book Your Ride</button>
+        </div>
+        <div class="co"></div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <div class="service-item">
+                <img src="https://via.placeholder.com/80" alt="Service 1">
+                <h3>City Rides</h3>
+                <p>Quick and reliable city rides for everyday commutes.</p>
+            </div>
+            <div class="service-item">
+                <img src="https://via.placeholder.com/80" alt="Service 2">
+                <h3>Long Distance Travel</h3>
+                <p>Comfortable and safe long-distance travel for you and your family.</p>
+            </div>
+            <div class="service-item">
+                <img src="https://via.placeholder.com/80" alt="Service 3">
+                <h3>Special Events</h3>
+                <p>Book us for weddings, corporate events, and other special occasions.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section (Slider) -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-slider">
+                <div class="about-slide">
+                    <img src="https://via.placeholder.com/600x300" alt="Bus Image 1">
+                    <p>Our fleet consists of modern, well-maintained buses to ensure your comfort and safety on every trip.</p>
+                </div>
+                <div class="about-slide">
+                    <img src="https://via.placeholder.com/600x300" alt="Bus Image 2">
+                    <p>We offer a wide range of services to meet all your transportation needs, from daily commutes to long-distance travel.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2>Customer Testimonials</h2>
+            <div class="testimonial-item">
+                <img src="https://via.placeholder.com/80" alt="Customer 1">
+                <p>"Great service! The ride was smooth and the driver was very friendly. Highly recommended!"</p>
+                <p class="customer-name">- John Doe</p>
+            </div>
+            <div class="testimonial-item">
+                <img src="https://via.placeholder.com/80" alt="Customer 2">
+                <p>"I booked their service for a corporate event and everything went perfectly. Professional and reliable!"</p>
+                <p class="customer-name">- Jane Smith</p>
+            </div>
+            <div class="testimonial-item">
+                <img src="https://via.placeholder.com/80" alt="Customer 3">
+                <p>"Amazing experience! I will definitely use their service again for my future travel needs."</p>
+                <p class="customer-name">- Mike Johnson</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <form>
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Transportation Company. All rights reserved.</p>
+    </footer>
+
+</body>
+
+
+<script>
+
+const navLinks = document.querySelectorAll('.nav-link');
+
+navLinks.forEach(link => {
+    link.addEventListener('click', function () {
+        navLinks.forEach(link => link.classList.remove('active'));  
+        this.classList.add('active');  
+    });
+});
+
+</script>
+</html>
