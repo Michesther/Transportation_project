@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: whitesmoke;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .otp-container {
+            background-color: #ffffff;
+            /* padding: 40px; */
+            padding-top:40px ;
+            padding-bottom:20px ;
+            padding-left:40px ;
+            padding-right: 40px;
+            /* border-radius: 10px; */
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .otp-container h2 {
+            margin-bottom: 20px;
+        }
+
+        .otp-inputs {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 60px;
+            gap: 30px;
+            margin-top: 80px;
+        }
+
+        .otp-inputs input {
+            width: 90px;
+            height: 90px;
+            text-align: center;
+            font-size: 24px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .otp-inputs input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .otp-container button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 40px;
+        }
+
+        .otp-container button:hover {
+            background-color: #0056b3;
+        }
+
+        .error-message, .success-message {
+            margin-top: 20px;
+            font-size: 14px;
+            color: red;
+        }
+
+        .success-message {
+            color: green;
+        }
+
+        #timer {
+            font-size: 18px;
+            margin-bottom: -20px;
+            font-family: arial;
+            font-weight: bold;
+            color: red;
+           
+        }
+
+        .request-otp {
+            margin-top: 20px;
+            display: none;
+            cursor: pointer;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="otp-container">
+        <h2>Verify your OTP</h2>
+        <p style="color: rgb(132, 126, 126); font-weight: bold;"> Enter the 4 digit sent to your email</p>
+
+        <div class="otp-inputs">
+            <input type="text" maxlength="1" id="otp1" oninput="moveToNext(this, 'otp2')" autofocus>
+            <input type="text" maxlength="1" id="otp2" oninput="moveToNext(this, 'otp3')">
+            <input type="text" maxlength="1" id="otp3" oninput="moveToNext(this, 'otp4')">
+            <input type="text" maxlength="1" id="otp4" oninput="moveToNext(this, '')">
+        </div>
+
+        <div id="timer">OTP expires in <span id="time">02:00</span></div>
+        <button id="verify-btn" onclick="verifyOTP()">Verify OTP</button>
+
+        <div id="error-container" class="error-message"></div>
+        <div id="success-container" class="success-message"></div>
+
+        <p class="request-otp" id="request-otp" onclick="requestNewOTP()">Resend OTP</p>
+
+    </div>
+
+    <script>
+        let countdown;
+let otpExpired = false;
+
+function startCountdown() {
+    let time = 120; // 2 minutes in seconds
+    countdown = setInterval(function () {
+        if (time <= 0) {
+            clearInterval(countdown);
+            otpExpired = true;
+            document.getElementById('time').innerHTML = "00:00";
+            showError("Invalid OTP. OTP has expired.");
+            document.getElementById('verify-btn').disabled = true;
+            document.getElementById('request-otp').style.display = 'block'; // Show the request OTP option
+        } else {
+            let minutes = Math.floor(time / 60);
+            let seconds = time % 60;
+            document.getElementById('time').innerHTML = `0${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+            time--;
+        }
+    }, 1000);
+}
+
+function moveToNext(current, nextFieldID) {
+    if (current.value.length === 1 && nextFieldID) {
+        document.getElementById(nextFieldID).focus();
+    }
+}
+
+function showError(message) {
+    const errorContainer = document.getElementById("error-container");
+    errorContainer.innerHTML = message;
+    errorContainer.style.display = "block";
+
+    // Hide error message after 5 seconds
+    setTimeout(() => {
+        errorContainer.style.display = "none";
+    }, 5000);
+}
+
+function verifyOTP() {
+    if (otpExpired) {
+        showError("Invalid OTP. OTP has expired.");
+        return;
+    }
+
+    let otp = '';
+    otp += document.getElementById('otp1').value;
+    otp += document.getElementById('otp2').value;
+    otp += document.getElementById('otp3').value;
+    otp += document.getElementById('otp4').value;
+
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "verify_otp.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                let response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                    window.location.href = "login.php"; // Redirect on success
+                } else {
+                    showError(response.message);
+                }
+            } else {
+                showError("An error occurred while verifying OTP.");
+            }
+        }
+    };
+    xhr.send("otp=" + encodeURIComponent(otp));
+}
+
+function requestNewOTP() {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "new_otp.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            let response = JSON.parse(xhr.responseText);
+            if (response.success) {
+                alert(response.message);
+               
+                document.getElementById('time').innerHTML = "02:00";
+                otpExpired = false; 
+                startCountdown(); 
+                document.getElementById('verify-btn').disabled = false; 
+                document.getElementById('request-otp').style.display = 'none'; 
+            } else {
+                alert(response.message);
+            }
+        }
+    };
+    xhr.send(); 
+}
+
+
+        // Start the countdown when the page loads
+        window.onload = startCountdown;
+    </script>
+
+</body>
+</html>

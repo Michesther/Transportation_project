@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIGM - Modern Commute</title>
+    <style>
+
+        /* General Styles */
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1c1c1c;
+    color: white;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.btn {
+    background-color: #e31937;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Header Styles */
+header {
+    background-color: #111;
+    padding: 20px 0;
+}
+
+.logo {
+    float: left;
+}
+
+nav {
+    float: right;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+/* Hero Section Styles */
+.hero {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.hero .container {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+}
+
+/* Booking Section Styles */
+.booking {
+    padding: 50px 0;
+}
+
+.booking h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.booking-form {
+    background-color: #222;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.trip-type {
+    display: flex;
+    align-items: center;
+}
+
+.trip-type input[type="radio"] {
+    margin-right: 5px;
+}
+
+.trip-type label {
+    margin-right: 20px;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #111;
+    padding: 20px 0;
+    text-align: center;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    nav ul {
+        display: block;
+        text-align: center;
+    }
+
+    nav li {
+        display: block;
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+
+    .hero .container {
+        top: 70%;
+    }
+
+    .booking-form {
+        padding: 20px;
+    }
+}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#" class="logo">
+                <img src="gigm-logo.png" alt="GIGM Logo">
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#">Move Freely</a></li>
+                    <li><a href="#">Do Freely</a></li>
+                    <li><a href="#">Suggest Route</a></li>
+                    <li><a href="#" class="btn">Sign In / Sign Up</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <section class="hero">
+        <div class="container">
+            <h1>The modern way to commute across cities</h1>
+            <p>GIGM is an African technology powered company, providing seamless mobility services to commuters across Africa.</p>
+        </div>
+        <img src="hero-background.jpg" alt="Hero Background" class="hero-image">
+    </section>
+    <section class="booking">
+        <div class="container">
+            <h2>Book Your Journey</h2>
+            <div class="booking-form">
+                <div class="form-group">
+                    <label for="trip-type">Trip Type:</label>
+                    <div class="trip-type">
+                        <input type="radio" name="trip-type" id="one-way" checked>
+                        <label for="one-way">One Way</label>
+                        <input type="radio" name="trip-type" id="round-trip">
+                        <label for="round-trip">Round Trip</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="departure-terminal">Travelling From:</label>
+                    <select id="departure-terminal">
+                        <option value="">Select Terminal</option>
+                        <option value="terminal-1">Terminal 1</option>
+                        <option value="terminal-2">Terminal 2</option>
+                        <option value="terminal-3">Terminal 3</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="arrival-terminal">Travelling To:</label>
+                    <select id="arrival-terminal">
+                        <option value="">Select Terminal</option>
+                        <option value="terminal-1">Terminal 1</option>
+                        <option value="terminal-2">Terminal 2</option>
+                        <option value="terminal-3">Terminal 3</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="departure-date">Departure Date:</label>
+                    <input type="date" id="departure-date" value="2024-09-28">
+                </div>
+                <div class="form-group">
+                    <label for="adults">Adults:</label>
+                    <select id="adults">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+                <button class="btn" id="proceed-button">Proceed</button>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 GIGM. All Rights Reserved.</p>
+        </div>
+    </footer>
+    <script>
+
+const proceedButton = document.getElementById('proceed-button');
+
+proceedButton.addEventListener('click', () => {
+    // Get values from the form
+    const tripType = document.querySelector('input[name="trip-type"]:checked').value;
+    const departureTerminal = document.getElementById('departure-terminal').value;
+    const arrivalTerminal = document.getElementById('arrival-terminal').value;
+    const departureDate = document.getElementById('departure-date').value;
+    const adults = document.getElementById('adults').value;
+
+    // Validate form data
+    if (
+        departureTerminal === "" || 
+        arrivalTerminal === "" || 
+        departureDate === ""
+    ) {
+        alert("Please fill in all required fields.");
+        return;
+    }
+
+    // You can use this data to send an AJAX request to your server
+    // to process the booking.
+    console.log("Trip Type:", tripType);
+    console.log("Departure Terminal:", departureTerminal);
+    console.log("Arrival Terminal:", arrivalTerminal);
+    console.log("Departure Date:", departureDate);
+    console.log("Adults:", adults);
+
+    // Example: Redirect to a booking confirmation page
+    // window.location.href = "booking-confirmation.html";
+});
+    </script>
+</body>
+</html>

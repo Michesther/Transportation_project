@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Navbar Styles */
+.navbar {
+    background-color: #333;
+    padding: 10px 0;
+    position: relative;
+    width: 100%;
+}
+
+.navbar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    color: white;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.navbar-toggle {
+    display: none;
+    background-color: #333;
+    border: none;
+    cursor: pointer;
+}
+
+.navbar-toggle .menu-bar {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 5px 0;
+}
+
+.nav {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav li {
+    padding: 10px 0;
+}
+
+.nav li a {
+    color: white;
+    font-size: 1rem;
+    text-transform: uppercase;
+    transition: color 0.3s;
+}
+
+.nav li a:hover {
+    color: #ff6b00;
+}
+
+/* Responsive Menu */
+@media (max-width: 768px) {
+    .navbar-toggle {
+        display: block;
+    }
+
+    .menu-ui-design {
+        display: none;
+        flex-direction: column;
+        background-color: #333;
+        position: absolute;
+        top: 50px;
+        left: 0;
+        width: 100%;
+    }
+
+    .menu-ui-design.active {
+        display: flex;
+    }
+
+    .nav {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .nav li {
+        text-align: center;
+        padding: 15px 0;
+    }
+}
+    </style>
+</head>
+<body>
+    <section id="home" class="welcome-hero">
+        <div class="top-area">
+            <div class="header-area">
+                <nav class="navbar">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" onclick="toggleMenu()">
+                                <span class="menu-bar"></span>
+                                <span class="menu-bar"></span>
+                                <span class="menu-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="#">GEO TRANSPORT LTD</a>
+                        </div>
+
+                        <!-- Navigation Menu -->
+                        <div class="menu-ui-design" id="navbar-menu">
+                            <ul class="nav">
+                                <li class="scroll active"><a href="#home">Home</a></li>
+                                <li class="scroll"><a href="#service">Service</a></li>
+                                <li class="scroll"><a href="#featured-cars">Featured Model</a></li>
+                                <li class="scroll"><a href="#new-cars">Our Buses</a></li>
+                                <li class="scroll"><a href="#brand">Brands</a></li>
+                                <li class="scroll"><a href="#contact">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
